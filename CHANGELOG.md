@@ -1,3 +1,7 @@
+## 1.9.4 - January 2025
+
+- Add wallet history request
+ 
 ## 1.9.3 - July 2024
 
 - Add `sbp_oper_id` for payout method response

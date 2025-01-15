@@ -66,6 +66,9 @@ use KassaCom\SDK\Model\Request\Reports\PaymentsReportTransport;
 use KassaCom\SDK\Model\Request\Reports\PayoutsReportRequest;
 use KassaCom\SDK\Model\Request\Reports\PayoutsReportSerializer;
 use KassaCom\SDK\Model\Request\Reports\PayoutsReportTransport;
+use KassaCom\SDK\Model\Request\Reports\WalletHistoryReportRequest;
+use KassaCom\SDK\Model\Request\Reports\WalletHistoryReportSerializer;
+use KassaCom\SDK\Model\Request\Reports\WalletHistoryReportTransport;
 use KassaCom\SDK\Model\Request\Subscription\GetSubscriptionRequest;
 use KassaCom\SDK\Model\Request\Subscription\GetSubscriptionSerializer;
 use KassaCom\SDK\Model\Request\Subscription\GetSubscriptionTransport;
@@ -92,7 +95,7 @@ use KassaCom\SDK\Transport\CurlApiTransport;
 
 class Client
 {
-    const VERSION = '1.9.3';
+    const VERSION = '1.9.4';
 
     /** @var AbstractApiTransport */
     private $apiTransport;
@@ -431,13 +434,39 @@ class Client
         $payoutsReportTransport = new PayoutsReportTransport($payoutsReportSerializer);
 
         $filename = [];
-        $filename[] = '$payouts_report';
+        $filename[] = 'payouts_report';
         $filename[] = $payoutsReport->getDatetimeFrom()->format('Y-m-d-H-i-s');
         $filename[] = '_';
         $filename[] = $payoutsReport->getDatetimeTo()->format('Y-m-d-H-i-s');
         $filename[] = '.csv';
 
         return $this->download($payoutsReportTransport, join($filename));
+    }
+
+    /**
+     * @param array|WalletHistoryReportRequest $walletHistoryReport
+     *
+     * @return Psr7\MessageTrait
+     * @throws TransportException
+     */
+    public function getWalletHistoryReport($walletHistoryReport)
+    {
+        if (!($walletHistoryReport instanceof WalletHistoryReportRequest)) {
+            $walletHistoryReport = RequestCreator::create(WalletHistoryReportRequest::class, $walletHistoryReport);
+        }
+
+        ObjectRecursiveValidator::validate($walletHistoryReport);
+        $walletHistorySerializer = new WalletHistoryReportSerializer($walletHistoryReport);
+        $walletHistoryTransport = new WalletHistoryReportTransport($walletHistorySerializer);
+
+        $filename = [];
+        $filename[] = 'wallet_history_report';
+        $filename[] = $walletHistoryReport->getDatetimeFrom()->format('Y-m-d-H-i-s');
+        $filename[] = '_';
+        $filename[] = $walletHistoryReport->getDatetimeTo()->format('Y-m-d-H-i-s');
+        $filename[] = '.csv';
+
+        return $this->download($walletHistoryTransport, join($filename));
     }
 
     /**
