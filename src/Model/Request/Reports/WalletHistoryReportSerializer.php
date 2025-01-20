@@ -20,8 +20,8 @@ class WalletHistoryReportSerializer extends AbstractRequestSerializer
             'wallet_id' => $request->getWalletId(),
         ];
 
-        if ($request->getOperationType() !== null) {
-            $data['operation_type'] = $request->getOperationType();
+        if ($request->getOperationTypes() !== null) {
+            $data['operation_types'] = $request->getOperationTypes();
         }
 
         return $data;

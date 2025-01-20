@@ -1,3 +1,7 @@
+## 1.9.5 - January 2025
+
+- Fix field name in wallet history request
+
 ## 1.9.4 - January 2025
 
 - Add wallet history request

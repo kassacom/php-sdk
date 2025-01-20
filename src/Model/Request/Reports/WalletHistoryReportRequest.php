@@ -36,7 +36,7 @@ class WalletHistoryReportRequest extends AbstractRequest
      *
      * @var array|null
      */
-    private $operationType;
+    private $operationTypes;
 
     /**
      * @return \DateTime
@@ -89,17 +89,17 @@ class WalletHistoryReportRequest extends AbstractRequest
     /**
      * @return array|null
      */
-    public function getOperationType()
+    public function getOperationTypes()
     {
-        return $this->operationType;
+        return $this->operationTypes;
     }
 
     /**
-     * @param array|null $operationType
+     * @param array|null $operationTypes
      */
-    public function setOperationType($operationType)
+    public function setOperationTypes($operationTypes)
     {
-        $this->operationType = $operationType;
+        $this->operationTypes = $operationTypes;
     }
 
     /**
@@ -120,7 +120,7 @@ class WalletHistoryReportRequest extends AbstractRequest
     public function getOptionalFields()
     {
         return [
-            'operation_type' => [self::TYPE_STRING],
+            'operation_types' => [self::TYPE_STRING],
         ];
     }
 }

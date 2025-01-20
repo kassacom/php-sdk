@@ -95,7 +95,7 @@ use KassaCom\SDK\Transport\CurlApiTransport;
 
 class Client
 {
-    const VERSION = '1.9.4';
+    const VERSION = '1.9.5';
 
     /** @var AbstractApiTransport */
     private $apiTransport;
