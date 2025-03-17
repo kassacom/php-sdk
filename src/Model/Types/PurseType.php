@@ -24,6 +24,7 @@ class PurseType extends AbstractCustomType
             PaymentMethodDataItem::WEBMONEY_WALLET_PURSE_E,
             PaymentMethodDataItem::WEBMONEY_WALLET_PURSE_U,
             PaymentMethodDataItem::WEBMONEY_WALLET_PURSE_B,
+            PaymentMethodDataItem::WEBMONEY_WALLET_PURSE_T,
         ];
 
         if (!in_array($value, $availablePurseType, true)) {
