@@ -1326,6 +1326,12 @@ class ClientTest extends TestCase
         } else {
             $this->assertNull($paymentMethod->getRrn());
         }
+
+        if (!empty($expectedContent['auth_code'])) {
+            $this->assertEquals($expectedContent['auth_code'], $paymentMethod->getAuthCode());
+        } else {
+            $this->assertNull($paymentMethod->getAuthCode());
+        }
     }
 
 

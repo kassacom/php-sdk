@@ -26,6 +26,9 @@ class PaymentMethodItem extends AbstractResponse
     /** @var string|null */
     protected $tinkoffPayQrUrl;
 
+    /** @var string|null */
+    protected $authCode;
+
     /**
      * @return string|null
      */
@@ -102,6 +105,19 @@ class PaymentMethodItem extends AbstractResponse
         return $this;
     }
 
+    public function getAuthCode()
+    {
+        return $this->authCode;
+    }
+
+    /**
+     * @param string|null $authCode
+     */
+    public function setAuthCode($authCode)
+    {
+        $this->authCode = $authCode;
+    }
+
     /**
      * @inheritDoc
      */
@@ -120,6 +136,7 @@ class PaymentMethodItem extends AbstractResponse
         return [
             'account' => self::TYPE_STRING,
             'rrn' => self::TYPE_STRING,
+            'auth_code' => self::TYPE_STRING,
             'card' => CardItem::class,
             'qr_link' => self::TYPE_STRING,
             'qr_image' => self::TYPE_STRING,

@@ -1,3 +1,7 @@
+## 1.9.7 - April 2025
+
+- Add auth_code to payment response
+
 ## 1.9.6 - Match 2025
 
 - Add support WMT (Webmoney)

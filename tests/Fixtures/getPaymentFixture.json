@@ -19,7 +19,8 @@
   "payment_method": {
     "type": "card",
     "account": "420000xxxxxx0000",
-    "rrn": 123
+    "rrn": 123,
+    "auth_code": "123456"
   },
   "custom_parameters": {
     "email": "vasia@gmail.com",
