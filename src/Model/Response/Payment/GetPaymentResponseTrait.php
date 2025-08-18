@@ -10,6 +10,7 @@ use KassaCom\SDK\Model\Response\Item\PaymentMethodItem;
 use KassaCom\SDK\Model\Response\Item\ProjectResponseItem;
 use KassaCom\SDK\Model\Response\Item\ReceiptItem;
 use KassaCom\SDK\Model\Response\Item\SplitResponseItem;
+use KassaCom\SDK\Model\Response\Item\SubscriptionItem;
 use KassaCom\SDK\Model\Response\Item\WalletResponseItem;
 use KassaCom\SDK\Model\Response\Refund\GetRefundResponse;
 
@@ -136,6 +137,11 @@ trait GetPaymentResponseTrait
      * @var SplitResponseItem[]|null
      */
     private $split;
+
+    /**
+     * @var SubscriptionItem|null
+     */
+    private $subscription;
 
     /**
      * @return int
@@ -620,6 +626,19 @@ trait GetPaymentResponseTrait
         return $this;
     }
 
+    public function getSubscription()
+    {
+        return $this->subscription;
+    }
+
+    /**
+     * @param SubscriptionItem|null $subscription
+     */
+    public function setSubscription($subscription)
+    {
+        $this->subscription = $subscription;
+    }
+
     /**
      * @inheritDoc
      */
@@ -659,6 +678,7 @@ trait GetPaymentResponseTrait
             'payer' => MoneyItem::class,
             'extra' => MoneyItem::class,
             'error_details' => ErrorDetailsItem::class,
+            'subscription' => SubscriptionItem::class,
         ];
     }
 }

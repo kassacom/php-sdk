@@ -1,3 +1,7 @@
+## 1.9.8 - August 2025
+
+- Add subscription to payment response
+
 ## 1.9.7 - April 2025
 
 - Add auth_code to payment response
