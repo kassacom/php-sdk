@@ -1,40 +1,26 @@
 <?php
 
-
 namespace KassaCom\SDK\Model\Request;
 
-
+use KassaCom\SDK\Model\Interfaces\RestorableInterface;
 use KassaCom\SDK\Model\Response\Item\ErrorDetailsItem;
+use KassaCom\SDK\Model\Response\Item\MoneyItem;
 use KassaCom\SDK\Model\Response\Item\OrderResponseItem;
 use KassaCom\SDK\Model\Response\Item\PaymentMethodItem;
+use KassaCom\SDK\Model\Response\Item\ReceiptItem;
 use KassaCom\SDK\Model\Response\Item\RefundResponseItem;
+use KassaCom\SDK\Model\Response\Item\SplitResponseItem;
+use KassaCom\SDK\Model\Response\Item\SubscriptionItem;
 use KassaCom\SDK\Model\Response\Item\WalletResponseItem;
+use KassaCom\SDK\Model\Response\Payment\GetPaymentResponseTrait;
+use KassaCom\SDK\Model\Response\Refund\GetRefundResponse;
 use KassaCom\SDK\Model\Traits\RecursiveRestoreTrait;
 use KassaCom\SDK\Model\Types\NotificationType;
 
 class NotificationRequest extends AbstractRequest
 {
     use RecursiveRestoreTrait;
-
-    /**
-     * @var integer
-     */
-    private $id;
-
-    /**
-     * @var string|null
-     */
-    private $partnerPaymentId;
-
-    /**
-     * @var OrderResponseItem
-     */
-    private $order;
-
-    /**
-     * @var WalletResponseItem
-     */
-    private $wallet;
+    use GetPaymentResponseTrait;
 
     /**
      * @var RefundResponseItem|null
@@ -42,127 +28,9 @@ class NotificationRequest extends AbstractRequest
     private $refund;
 
     /**
-     * @var string
-     */
-    private $token;
-
-    /**
-     * @var \DateTime
-     */
-    private $createDate;
-
-    /**
-     * @var \DateTime|null
-     */
-    private $expireDate;
-
-    /**
-     * @var string|null
-     */
-    private $ip;
-
-    /**
-     * @var string
-     */
-    private $status;
-
-    /**
-     * @deprecated
-     * @see $errorDetails
-     * @var string|null
-     */
-    private $statusDescription;
-
-    /**
-     * @var ErrorDetailsItem|null
-     */
-    private $errorDetails;
-
-    /**
-     * @var PaymentMethodItem|null
-     */
-    private $paymentMethod;
-
-    /**
-     * @var array|null
-     */
-    private $customParameters;
-
-    /**
-     * @var boolean|null
-     */
-    private $isTest;
-
-    /**
      * @var object
      */
     private $notificationType;
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getPartnerPaymentId()
-    {
-        return $this->partnerPaymentId;
-    }
-
-    /**
-     * @param string|null $partnerPaymentId
-     */
-    public function setPartnerPaymentId($partnerPaymentId)
-    {
-        $this->partnerPaymentId = $partnerPaymentId;
-    }
-
-
-
-    /**
-     * @return OrderResponseItem
-     */
-    public function getOrder()
-    {
-        return $this->order;
-    }
-
-    /**
-     * @param OrderResponseItem $order
-     */
-    public function setOrder($order)
-    {
-        $this->order = $order;
-    }
-
-    /**
-     * @return WalletResponseItem
-     */
-    public function getWallet()
-    {
-        return $this->wallet;
-    }
-
-    /**
-     * @param WalletResponseItem $wallet
-     */
-    public function setWallet($wallet)
-    {
-        $this->wallet = $wallet;
-    }
 
     /**
      * @return RefundResponseItem|null
@@ -184,170 +52,6 @@ class NotificationRequest extends AbstractRequest
     }
 
     /**
-     * @return string
-     */
-    public function getToken()
-    {
-        return $this->token;
-    }
-
-    /**
-     * @param string $token
-     */
-    public function setToken($token)
-    {
-        $this->token = $token;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getCreateDate()
-    {
-        return $this->createDate;
-    }
-
-    /**
-     * @param \DateTime $createDate
-     */
-    public function setCreateDate($createDate)
-    {
-        $this->createDate = $createDate;
-    }
-
-    /**
-     * @return \DateTime|null
-     */
-    public function getExpireDate()
-    {
-        return $this->expireDate;
-    }
-
-    /**
-     * @param \DateTime|null $expireDate
-     */
-    public function setExpireDate($expireDate)
-    {
-        $this->expireDate = $expireDate;
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getIp()
-    {
-        return $this->ip;
-    }
-
-    /**
-     * @param null|string $ip
-     */
-    public function setIp($ip)
-    {
-        $this->ip = $ip;
-    }
-
-    /**
-     * @return string
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
-     * @param string $status
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-    }
-
-    /**
-     * @deprecated
-     * @see getErrorDetails
-     * @return null|string
-     */
-    public function getStatusDescription()
-    {
-        return $this->statusDescription;
-    }
-
-    /**
-     * @deprecated
-     * @see setErrorDetails
-     * @param null|string $statusDescription
-     */
-    public function setStatusDescription($statusDescription)
-    {
-        $this->statusDescription = $statusDescription;
-    }
-
-    /**
-     * @return ErrorDetailsItem|null
-     */
-    public function getErrorDetails()
-    {
-        return $this->errorDetails;
-    }
-
-    /**
-     * @param ErrorDetailsItem|null $errorDetails
-     */
-    public function setErrorDetails($errorDetails)
-    {
-        $this->errorDetails = $errorDetails;
-    }
-
-    /**
-     * @return PaymentMethodItem|null
-     */
-    public function getPaymentMethod()
-    {
-        return $this->paymentMethod;
-    }
-
-    /**
-     * @param PaymentMethodItem|null $paymentMethod
-     */
-    public function setPaymentMethod($paymentMethod)
-    {
-        $this->paymentMethod = $paymentMethod;
-    }
-
-    /**
-     * @return array|null
-     */
-    public function getCustomParameters()
-    {
-        return $this->customParameters;
-    }
-
-    /**
-     * @param array|null $customParameters
-     */
-    public function setCustomParameters($customParameters)
-    {
-        $this->customParameters = $customParameters;
-    }
-
-    /**
-     * @return bool|null
-     */
-    public function getIsTest()
-    {
-        return $this->isTest;
-    }
-
-    /**
-     * @param bool|null $isTest
-     */
-    public function setIsTest($isTest)
-    {
-        $this->isTest = $isTest;
-    }
-
-    /**
      * @return object
      */
     public function getNotificationType()
@@ -366,12 +70,12 @@ class NotificationRequest extends AbstractRequest
     public function getRequiredFields()
     {
         return [
-            'id' => AbstractRequest::TYPE_INTEGER,
+            'id' => RestorableInterface::TYPE_INTEGER,
             'order' => OrderResponseItem::class,
             'wallet' => WalletResponseItem::class,
-            'token' => AbstractRequest::TYPE_STRING,
-            'create_date' => AbstractRequest::TYPE_DATE,
-            'status' => AbstractRequest::TYPE_STRING,
+            'token' => RestorableInterface::TYPE_STRING,
+            'create_date' => RestorableInterface::TYPE_DATE,
+            'status' => RestorableInterface::TYPE_STRING,
             'notification_type' => new NotificationType($this),
         ];
     }
@@ -379,13 +83,24 @@ class NotificationRequest extends AbstractRequest
     public function getOptionalFields()
     {
         return [
-            'partner_payment_id' => AbstractRequest::TYPE_STRING,
-            'expire_date' => AbstractRequest::TYPE_DATE,
-            'status_description' => AbstractRequest::TYPE_STRING,
+            'partner_payment_id' => RestorableInterface::TYPE_STRING,
+            'expire_date' => RestorableInterface::TYPE_DATE,
+            'ip' => RestorableInterface::TYPE_STRING,
+            'status_description' => RestorableInterface::TYPE_STRING,
             'payment_method' => PaymentMethodItem::class,
-            'custom_parameters' => AbstractRequest::TYPE_ARRAY,
-            'is_test' => AbstractRequest::TYPE_BOOLEAN,
+            'custom_parameters' => RestorableInterface::TYPE_ARRAY,
+            'update_date' => RestorableInterface::TYPE_DATE,
+            'receipt' => ReceiptItem::class,
+            'is_test' => RestorableInterface::TYPE_BOOLEAN,
+            'available_full_refund' => self::TYPE_BOOLEAN,
+            'available_partial_refund' => self::TYPE_BOOLEAN,
+            'available_for_refund' => MoneyItem::class,
+            'refunds' => [GetRefundResponse::class],
+            'split' => [SplitResponseItem::class],
+            'payer' => MoneyItem::class,
+            'extra' => MoneyItem::class,
             'error_details' => ErrorDetailsItem::class,
+            'subscription' => SubscriptionItem::class,
             'refund' => RefundResponseItem::class,
         ];
     }

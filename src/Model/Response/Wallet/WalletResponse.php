@@ -1,11 +1,10 @@
 <?php
 
-
 namespace KassaCom\SDK\Model\Response\Wallet;
-
 
 use KassaCom\SDK\Model\Response\AbstractResponse;
 use KassaCom\SDK\Model\Response\Item\BalanceItem;
+use KassaCom\SDK\Model\Response\Item\WalletLimitResponseItem;
 use KassaCom\SDK\Model\Traits\RecursiveRestoreTrait;
 
 class WalletResponse extends AbstractResponse
@@ -45,6 +44,11 @@ class WalletResponse extends AbstractResponse
      * @var boolean
      */
     private $isDefault;
+
+    /**
+     * @var WalletLimitResponseItem|null
+     */
+    private $limits;
 
     /**
      * @return string
@@ -162,6 +166,19 @@ class WalletResponse extends AbstractResponse
         return $this->getType() == self::WALLET_TYPE_INDIVIDUAL;
     }
 
+    public function getLimits()
+    {
+        return $this->limits;
+    }
+
+    /**
+     * @param WalletLimitResponseItem|null $limits
+     */
+    public function setLimits($limits)
+    {
+        $this->limits = $limits;
+    }
+
     /**
      * @inheritDoc
      */
@@ -182,6 +199,8 @@ class WalletResponse extends AbstractResponse
      */
     public function getOptionalFields()
     {
-        return [];
+        return [
+            'limits' => WalletLimitResponseItem::class,
+        ];
     }
 }

@@ -1,3 +1,9 @@
+## 1.9.9 - August 2025
+
+- Add wallet limits to response
+- Add change wallet method
+- Fix NotificationRequest
+ 
 ## 1.9.8 - August 2025
 
 - Add subscription to payment response

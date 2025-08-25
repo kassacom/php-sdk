@@ -72,6 +72,9 @@ use KassaCom\SDK\Model\Request\Reports\WalletHistoryReportTransport;
 use KassaCom\SDK\Model\Request\Subscription\GetSubscriptionRequest;
 use KassaCom\SDK\Model\Request\Subscription\GetSubscriptionSerializer;
 use KassaCom\SDK\Model\Request\Subscription\GetSubscriptionTransport;
+use KassaCom\SDK\Model\Request\Wallet\WalletChangeRequest;
+use KassaCom\SDK\Model\Request\Wallet\WalletChangeSerializer;
+use KassaCom\SDK\Model\Request\Wallet\WalletChangeTransport;
 use KassaCom\SDK\Model\Request\Wallet\WalletRequest;
 use KassaCom\SDK\Model\Request\Wallet\WalletSerializer;
 use KassaCom\SDK\Model\Response\AbstractResponse;
@@ -95,7 +98,7 @@ use KassaCom\SDK\Transport\CurlApiTransport;
 
 class Client
 {
-    const VERSION = '1.9.8';
+    const VERSION = '1.9.9';
 
     /** @var AbstractApiTransport */
     private $apiTransport;
@@ -472,7 +475,7 @@ class Client
     /**
      * @param string|WalletRequest $walletRequest
      *
-     * @return AbstractResponse
+     * @return AbstractResponse|WalletResponse
      *
      * @throws ResponseException
      * @throws TransportException
@@ -487,6 +490,27 @@ class Client
         $walletSerializer = new WalletSerializer($walletRequest);
 
         return $this->execute($walletRequest->getTransport($walletSerializer), WalletResponse::class);
+    }
+
+    /**
+     * @param WalletChangeRequest|array $request
+     *
+     * @return AbstractResponse|WalletResponse
+     *
+     * @throws ResponseException
+     * @throws TransportException
+     */
+    public function walletChange($request)
+    {
+        if (!($request instanceof WalletChangeRequest)) {
+            $request = RequestCreator::create(WalletChangeRequest::class, $request);;
+        }
+
+        ObjectRecursiveValidator::validate($request);
+        $serializer = new WalletChangeSerializer($request);
+        $transport = new WalletChangeTransport($serializer);
+
+        return $this->execute($transport, WalletResponse::class);
     }
 
     /**
