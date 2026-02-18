@@ -1,3 +1,7 @@
+## 1.9.10 - February 2026
+
+- Added new taxes constants
+
 ## 1.9.9 - August 2025
 
 - Add wallet limits to response

@@ -17,17 +17,35 @@ class ItemsReceiptRequestItem extends AbstractRequestItem implements \JsonSerial
     /** Налог НДС по ставке 0% */
     const TAX_VAT0 = 'vat0';
 
+    /** Налог НДС по ставке 5% */
+    const TAX_VAT5 = 'vat5';
+
+    /** Налог НДС по ставке 7% */
+    const TAX_VAT7 = 'vat7';
+
     /** Налог НДС по ставке 10% */
     const TAX_VAT10 = 'vat10';
 
     /** Налог НДС по ставке 20% */
     const TAX_VAT20 = 'vat20';
 
+    /** Налог НДС по ставке 22% */
+    const TAX_VAT22 = 'vat22';
+
+    /** Налог НДС по расчетной ставке 5/105 */
+    const TAX_VAT105 = 'vat105';
+
+    /** Налог НДС по расчетной ставке 7/107 */
+    const TAX_VAT107 = 'vat107';
+
     /** Налог НДС по расчетной ставке 10/110 */
     const TAX_VAT110 = 'vat110';
 
     /** Налог НДС по расчетной ставке 20/120 */
     const TAX_VAT120 = 'vat120';
+
+    /** Налог НДС по расчетной ставке 22/122 */
+    const TAX_VAT122 = 'vat122';
 
     /**
      * @return array
@@ -37,10 +55,16 @@ class ItemsReceiptRequestItem extends AbstractRequestItem implements \JsonSerial
         return [
             self::TAX_NONE,
             self::TAX_VAT0,
+            self::TAX_VAT5,
+            self::TAX_VAT7,
             self::TAX_VAT10,
             self::TAX_VAT20,
+            self::TAX_VAT22,
+            self::TAX_VAT105,
+            self::TAX_VAT107,
             self::TAX_VAT110,
             self::TAX_VAT120,
+            self::TAX_VAT122,
         ];
     }
 
