@@ -29,6 +29,9 @@ class PaymentMethodItem extends AbstractResponse
     /** @var string|null */
     protected $authCode;
 
+    /** @var string|null */
+    protected $pam;
+
     /**
      * @return string|null
      */
@@ -118,6 +121,19 @@ class PaymentMethodItem extends AbstractResponse
         $this->authCode = $authCode;
     }
 
+    public function getPam()
+    {
+        return $this->pam;
+    }
+
+    /**
+     * @param string|null $pam
+     */
+    public function setPam($pam)
+    {
+        $this->pam = $pam;
+    }
+
     /**
      * @inheritDoc
      */
@@ -142,6 +158,7 @@ class PaymentMethodItem extends AbstractResponse
             'qr_image' => self::TYPE_STRING,
             'tinkoff_pay_link' => self::TYPE_STRING,
             'tinkoff_pay_qr_url' => self::TYPE_STRING,
+            'pam' => self::TYPE_STRING,
         ];
     }
 }

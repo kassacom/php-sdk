@@ -1,3 +1,7 @@
+## 1.9.11 - July 2026
+
+- Added pam to payment method
+
 ## 1.9.10 - February 2026
 
 - Added new taxes constants
