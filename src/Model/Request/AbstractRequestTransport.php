@@ -63,9 +63,9 @@ abstract class AbstractRequestTransport
      * @return false|string
      * @throws TransportException
      */
-    public function getBodyForRequest()
+    public function getBodyForRequest($jsonEncodeFlags = 0)
     {
-        return json_encode($this->getBody());
+        return json_encode($this->getBody(), $jsonEncodeFlags);
     }
 
     /**

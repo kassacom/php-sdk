@@ -1,3 +1,7 @@
+## 1.9.12 - September 2026
+
+- Aware json_encode flags for serialize request
+
 ## 1.9.11 - July 2026
 
 - Added pam to payment method

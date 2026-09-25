@@ -98,10 +98,12 @@ use KassaCom\SDK\Transport\CurlApiTransport;
 
 class Client
 {
-    const VERSION = '1.9.11';
+    const VERSION = '1.9.12';
 
     /** @var AbstractApiTransport */
     private $apiTransport;
+
+    private $jsonEncodeFlags = 0;
 
     public function __construct(AbstractApiTransport $apiTransport = null)
     {
@@ -132,6 +134,16 @@ class Client
         }
 
         $this->apiTransport->setAuth($auth);
+    }
+
+    /**
+     * @param $flags int
+     *
+     * Flags for json_encode function
+     */
+    public function setJsonEncodeFlags($flags)
+    {
+        $this->jsonEncodeFlags = $flags;
     }
 
     /**
@@ -561,7 +573,7 @@ class Client
             $requestTransport->getPath(),
             $requestTransport->getMethod(),
             $requestTransport->getQueryParams(),
-            $requestTransport->getBodyForRequest(),
+            $requestTransport->getBodyForRequest($this->jsonEncodeFlags),
             $requestTransport->getHeaders()
         );
 
@@ -600,7 +612,7 @@ class Client
             $requestTransport->getPath(),
             $requestTransport->getMethod(),
             $requestTransport->getQueryParams(),
-            $requestTransport->getBodyForRequest(),
+            $requestTransport->getBodyForRequest($this->jsonEncodeFlags),
             $requestTransport->getHeaders()
         );
 
